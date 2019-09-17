@@ -1,14 +1,5 @@
 <template>
   <div>
-    <div class="vld-parent">
-        <loading :active.sync="isLoading" 
-        :can-cancel="true" 
-        :on-cancel="onCancel"
-        :is-full-page="fullPage"></loading>
-        
-        <label><input type="checkbox" v-model="fullPage">Full page?</label>
-        <button @click.prevent="doAjax">fetch Data</button>
-    </div>
     <section class="section pb-0 bg-gradient-info main-section">
       <div class="container">
         <div class="row row-grid align-items-center">
@@ -53,7 +44,7 @@
                   </div>
                 </div>
                 <div>
-                  <button @click.prevent="doAjax" class="btn btn-success btn-round btn-block btn-lg">Login</button>
+                  <button type="submit" class="btn btn-success btn-round btn-block btn-lg">Login</button>
                   <p class="text-center my-2">OR</p>
                   <div class="row d-flex align-items-center">
                     <div class="col-md-6">
@@ -69,6 +60,10 @@
                         <span class="nav-link-inner--text">New Registeration?</span>
                       </router-link>
                     </div>
+                    <!-- <div v-if="store.state.loggedIn">
+                      <h1>how data</h1>
+
+                    </div> -->
                   </div>
                 </div>
               </form>
@@ -77,7 +72,7 @@
         </div>
       </div>
     </section>
-    <notifications group="foo" position="top right" class="my-style" width="400" />
+
   </div>
 </template>
 
@@ -86,10 +81,7 @@
 <script>
 import VueRouter from "vue-router";
 import firebase from "firebase";
-   // Import component
-    import Loading from "vue-loading-overlay";
-    // Import stylesheet
-    import "vue-loading-overlay/dist/vue-loading.css";
+// import store from "../store";
 
 
 export default {
@@ -97,29 +89,12 @@ export default {
   data: function() {
     return {
       title: "LOGIN",
-      isLoading: false,
-      fullPage: true,
       userDetails: {
         email: null,
         password: null
       }
     };
-  },
-  components: {
-            Loading
-    },
-     methods: {
-            doAjax() {
-                this.isLoading = true;
-                // simulate AJAX
-                setTimeout(() => {
-                  this.isLoading = false
-                },5000)
-            },
-            onCancel() {
-              console.log('User cancelled the loader.')
-            }
-        }
+  }
    
     
   

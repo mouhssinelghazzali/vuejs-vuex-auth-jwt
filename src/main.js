@@ -5,6 +5,7 @@ import store from "./store";
 import Vuex from "vuex";
 import firebase from "firebase";
 
+
 Vue.config.productionTip = false;
 
 var firebaseConfig = {

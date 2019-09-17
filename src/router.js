@@ -5,7 +5,7 @@ import Login from "./views/Login";
 import Register from "./views/Register";
 import Profile from "./views/Profile";
 import Counter from "./components/Counter";
-import store from './store'
+import store from './store';
 Vue.use(Router);
 
 const router = new Router({

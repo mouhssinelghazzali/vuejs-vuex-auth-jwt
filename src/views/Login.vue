@@ -1,15 +1,7 @@
 <template>
   <div class="login">
     <div>
-       <div class="vld-parent">
-        <loading :active.sync="isLoading" 
-        :can-cancel="true" 
-        :on-cancel="onCancel"
-        :is-full-page="fullPage"></loading>
-        
-        <label><input type="checkbox" v-model="fullPage">Full page?</label>
-        <button @click.prevent="doAjax">fetch Data</button>
-    </div>
+    <double-bounce  :loading="loading" :color="color1" :size="size"></double-bounce>
       <div class="col-md-6 offset-md-3">
         <h2 class="display-4 text-center mt-5">Login Form</h2>
 
@@ -42,28 +34,29 @@
 
 <script>
 import axios from "axios";
-   // Import component
-    import Loading from "vue-loading-overlay";
-    // Import stylesheet
-    import "vue-loading-overlay/dist/vue-loading.css";
+import {DoubleBounce} from 'vue-loading-spinner'
+
 export default {
   name: "login",
+  components: {
+      DoubleBounce
+    },
   data() {
     return {
       email: "",
       password: "",
       error: "",
       isLoading: false,
-      fullPage: true,
+       color: '#cc181e',
+      color1: '#5bc0de',
+      size: '45px',
+      margin: '2px',
+      radius: '2px'
     };
   },
-  components: {
-            Loading
-    },
   methods: {
     performLogin() {
       
-      this.doAjax()
       this.$store.dispatch('performLoginAction',{
 
         email: this.email,
@@ -71,24 +64,14 @@ export default {
       })
       .then( res =>
       {
-        this.isLoading = true
+        this.isLoading = false
         this.$router.push('/profile')
       })
       .catch( err => {
         this.error  = "There was error  during login process"
         console.log(err.message)
       })
-    },
-    doAjax() {
-                this.isLoading = true;
-                // simulate AJAX
-                setTimeout(() => {
-                  this.isLoading = false
-                },5000)
-            },
-            onCancel() {
-              console.log('User cancelled the loader.')
-            }
+    }
   }
 };
 </script>
